@@ -1,0 +1,6 @@
+id,title,type,date,time,venue,status,color
+e1,Mathematics 101,Final Exam,May 15 2023,09:00 - 11:00 AM,Main Hall,assigned,primary
+e2,Computer Science 202,Midterm Exam,May 17 2023,01:00 - 03:00 PM,Science Block A,assigned,secondary
+e3,History 105,Final Exam,May 20 2023,10:00 AM - 12:00 PM,Arts Center,pending,accent
+e4,Physics 103,Practical Exam,May 22 2023,02:00 - 04:00 PM,Science Lab B,pending,primary
+e5,English Literature,Final Exam,May 25 2023,09:00 - 11:00 AM,Humanities Hall,assigned,secondary
