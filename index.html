@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Seating Arrangement System</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="light">
+  <div class="app-container">
+    <!-- Header/Navbar -->
+    <header class="navbar">
+      <div class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        <h1>ExamSeat</h1>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+          <li><a href="#" class="nav-link" data-page="dashboard">Dashboard</a></li>
+          <li><a href="#" class="nav-link" data-page="exams">Exams</a></li>
+          <li><a href="#" class="nav-link" data-page="seating">Seating</a></li>
+        </ul>
+      </nav>
+      <div class="auth-actions">
+        <button id="login-btn" class="btn btn-outline">Login</button>
+        <button id="register-btn" class="btn btn-primary">Register</button>
+        <div class="user-menu hidden">
+          <span id="username-display">Username</span>
+          <button id="logout-btn" class="btn btn-small">Logout</button>
+        </div>
+      </div>
+      <div class="theme-toggle">
+        <i class="fas fa-sun"></i>
+        <label class="switch">
+          <input type="checkbox" id="theme-switch">
+          <span class="slider round"></span>
+        </label>
+        <i class="fas fa-moon"></i>
+      </div>
+      <button class="mobile-menu-btn">
+        <i class="fas fa-bars"></i>
+      </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+      <!-- Home Page -->
+      <section id="home-page" class="page active">
+        <div class="hero">
+          <div class="hero-content">
+            <h1 class="animate-in">Welcome to ExamSeat</h1>
+            <p class="animate-in delay-1">The easiest way to manage exam seating arrangements and schedules.</p>
+            <div class="cta-buttons animate-in delay-2">
+              <button class="btn btn-primary btn-large">Get Started</button>
+              <button class="btn btn-outline btn-large">Learn More</button>
+            </div>
+          </div>
+          <div class="hero-image animate-in delay-3">
+            <div class="illustration">
+              <div class="exam-hall"></div>
+              <div class="students"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="features">
+          <h2>Key Features</h2>
+          <div class="feature-cards">
+            <div class="card feature-card animate-in">
+              <i class="fas fa-calendar-alt"></i>
+              <h3>Exam Scheduling</h3>
+              <p>Easily manage and view all your upcoming exams in one place.</p>
+            </div>
+            <div class="card feature-card animate-in delay-1">
+              <i class="fas fa-chair"></i>
+              <h3>Seating Management</h3>
+              <p>Automatically assign or manually adjust student seating arrangements.</p>
+            </div>
+            <div class="card feature-card animate-in delay-2">
+              <i class="fas fa-bell"></i>
+              <h3>Notifications</h3>
+              <p>Get timely reminders about upcoming exams and seating assignments.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Page (Student View) -->
+      <section id="dashboard-page" class="page">
+        <div class="dashboard-header">
+          <h1>Student Dashboard</h1>
+          <p>Welcome back, <span id="student-name">Student</span>!</p>
+        </div>
+        
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <i class="fas fa-calendar-check"></i>
+            <div class="stat-info">
+              <h3>Upcoming Exams</h3>
+              <p class="stat-value" id="upcoming-exams-count">0</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-check-circle"></i>
+            <div class="stat-info">
+              <h3>Seats Assigned</h3>
+              <p class="stat-value" id="seats-assigned-count">0</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fas fa-clock"></i>
+            <div class="stat-info">
+              <h3>Next Exam</h3>
+              <p class="stat-value" id="next-exam-date">-</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="exams-container">
+          <div class="section-header">
+            <h2>My Exams</h2>
+            <div class="filter-options">
+              <select id="exam-filter">
+                <option value="all">All Exams</option>
+                <option value="assigned">Seats Assigned</option>
+                <option value="pending">Pending</option>
+                <option value="completed">Completed</option>
+              </select>
+              <button id="reset-filter" class="btn btn-small btn-outline">Reset</button>
+            </div>
+          </div>
+          
+          <div id="exams-list" class="exam-cards">
+            <!-- Exam cards will be populated dynamically by JavaScript -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- Exam Details/Schedule Page -->
+      <section id="exams-page" class="page">
+        <div class="page-header">
+          <h1>Exam Schedule</h1>
+          <p>View and manage your upcoming examinations</p>
+        </div>
+        
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <button id="prev-month" class="btn btn-icon"><i class="fas fa-chevron-left"></i></button>
+            <h3 id="current-month">April 2023</h3>
+            <button id="next-month" class="btn btn-icon"><i class="fas fa-chevron-right"></i></button>
+          </div>
+          <div class="calendar" id="exam-calendar">
+            <!-- Calendar will be generated dynamically -->
+          </div>
+        </div>
+        
+        <div class="upcoming-exams">
+          <h2>Upcoming Exams</h2>
+          <div class="exam-timeline">
+            <!-- Timeline will be populated dynamically -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- Seating Plan Page -->
+      <section id="seating-page" class="page">
+        <div class="page-header">
+          <h1>Seating Arrangements</h1>
+          <p>View your assigned seats for upcoming exams</p>
+        </div>
+        
+        <div class="exam-selector">
+          <label for="exam-select">Select Exam:</label>
+          <select id="exam-select">
+            <!-- Options will be populated dynamically -->
+          </select>
+        </div>
+        
+        <div class="seating-container">
+          <div class="venue-info">
+            <h2 id="venue-name">Main Hall</h2>
+            <p id="exam-date">May 15, 2023 | 09:00 AM</p>
+          </div>
+          
+          <div class="seating-grid" id="seating-grid">
+            <!-- Seating grid will be generated dynamically -->
+          </div>
+          
+          <div class="seating-info">
+            <div class="seat-legend">
+              <div class="legend-item">
+                <div class="seat-icon available"></div>
+                <span>Available</span>
+              </div>
+              <div class="legend-item">
+                <div class="seat-icon occupied"></div>
+                <span>Occupied</span>
+              </div>
+              <div class="legend-item">
+                <div class="seat-icon your-seat"></div>
+                <span>Your Seat</span>
+              </div>
+              <div class="legend-item">
+                <div class="seat-icon reserved"></div>
+                <span>Reserved</span>
+              </div>
+            </div>
+            
+            <div class="your-seat-info">
+              <h3>Your Seat</h3>
+              <p id="seat-number">A1</p>
+              <button id="print-seating" class="btn btn-primary">Print Seating Info</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 404 Not Found Page -->
+      <section id="not-found-page" class="page">
+        <div class="not-found-content">
+          <h1>404</h1>
+          <h2>Page Not Found</h2>
+          <p>The page you are looking for does not exist or has been moved.</p>
+          <button class="btn btn-primary" data-page="home">Return to Home</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Auth Modals -->
+    <div id="auth-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="auth-tabs">
+          <button class="tab-btn active" data-tab="login">Login</button>
+          <button class="tab-btn" data-tab="register">Register</button>
+        </div>
+        
+        <div id="login-tab" class="auth-tab active">
+          <h2>Login to Your Account</h2>
+          <form id="login-form">
+            <div class="form-group">
+              <label for="login-username">Username</label>
+              <input type="text" id="login-username" name="username" required>
+            </div>
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <input type="password" id="login-password" name="password" required>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
+        </div>
+        
+        <div id="register-tab" class="auth-tab">
+          <h2>Create an Account</h2>
+          <form id="register-form">
+            <div class="form-group">
+              <label for="register-username">Username</label>
+              <input type="text" id="register-username" name="username" required>
+            </div>
+            <div class="form-group">
+              <label for="register-email">Email</label>
+              <input type="email" id="register-email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="register-password">Password</label>
+              <input type="password" id="register-password" name="password" required>
+            </div>
+            <div class="form-group">
+              <label for="register-confirm-password">Confirm Password</label>
+              <input type="password" id="register-confirm-password" name="confirm_password" required>
+            </div>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Exam Details Modal -->
+    <div id="exam-details-modal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <div class="exam-details">
+          <h2 id="exam-title">Exam Title</h2>
+          
+          <div class="detail-item">
+            <span class="detail-label">Type:</span>
+            <span id="exam-type" class="detail-value">Final Exam</span>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-label">Date:</span>
+            <span id="exam-detail-date" class="detail-value">May 15, 2023</span>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-label">Time:</span>
+            <span id="exam-time" class="detail-value">09:00 AM - 11:00 AM</span>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-label">Venue:</span>
+            <span id="exam-venue" class="detail-value">Main Hall</span>
+          </div>
+          
+          <div class="detail-item">
+            <span class="detail-label">Seat:</span>
+            <span id="exam-seat" class="detail-value">A1</span>
+          </div>
+          
+          <div class="exam-actions">
+            <button id="view-seating-btn" class="btn btn-outline" data-exam-id="">View Seating Plan</button>
+            <button id="print-details-btn" class="btn btn-primary" data-exam-id="">Print Details</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Notifications -->
+    <div id="notification" class="notification">
+      <div class="notification-content">
+        <i id="notification-icon" class="fas fa-info-circle"></i>
+        <p id="notification-message">This is a notification message.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
